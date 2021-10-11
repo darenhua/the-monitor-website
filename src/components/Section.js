@@ -51,6 +51,9 @@ export default function Post() {
                 description={post.description}
                 image={post.mainImage}
                 title={post.title}
+                homeStart=""
+                category={category}
+                slug={post.slug.current}
               />
             );
           })}

@@ -1,5 +1,4 @@
 import { NavLink, useLocation, useParams } from "react-router-dom";
-import "./Home.css";
 import { useState, useEffect } from "react";
 import sanityClient from "../client.js";
 import SmallCard from "./SmallCard.js";
@@ -13,7 +12,6 @@ import Container from "@mui/material/Container";
 export default function Home() {
   const [postData, setPost] = useState(null);
   const location = useLocation();
-  const { category } = useParams();
   useEffect(() => {
     sanityClient
       .fetch(
@@ -26,6 +24,7 @@ export default function Home() {
             description,
             fplarge,
             fpsmall,
+            categories[0]->{title},
             mainImage{
                 asset->{
                     _id,
@@ -37,14 +36,16 @@ export default function Home() {
       )
       .then((data) => setPost(data))
       .catch(console.error);
-  }, [category]);
+  });
   if (!postData) {
     return <div>Loading...</div>;
   }
   const frontPageLarge = postData.find((post) => post.fplarge);
   return (
     <Container sx={{ marginTop: "20px" }}>
-      <Typography variant="h4">Front Page</Typography>
+      <Typography variant="h4" sx={{ marginBottom: "10px" }}>
+        Front Page
+      </Typography>
       <Grid container spacing={3}>
         <Grid item xs={8}>
           {(() => {
@@ -55,6 +56,8 @@ export default function Home() {
                   description={frontPageLarge.description}
                   image={frontPageLarge.mainImage}
                   title={frontPageLarge.title}
+                  category={frontPageLarge.categories.title.toLowerCase()}
+                  slug={frontPageLarge.slug.current}
                 />
               );
             }
@@ -76,6 +79,8 @@ export default function Home() {
                     <SmallCard
                       description={post.description}
                       title={post.title}
+                      category={post.categories.title.toLowerCase()}
+                      slug={post.slug.current}
                     />
                   );
                 }
@@ -94,6 +99,9 @@ export default function Home() {
                     description={post.description}
                     image={post.mainImage}
                     title={post.title}
+                    homeStart="section/"
+                    category={post.categories.title.toLowerCase()}
+                    slug={post.slug.current}
                   />
                 );
               })}
