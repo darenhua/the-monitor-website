@@ -19,7 +19,13 @@ export default function Home() {
             title,
             slug,
             author->{
-              name
+              name,
+              image{
+              asset->{
+                _id,
+                url
+              }
+            }
             },
             description,
             fplarge,

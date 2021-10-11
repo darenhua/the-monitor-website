@@ -32,7 +32,7 @@ export default function SectionCard(props) {
             }}
           >
             <Box sx={{ display: "flex" }}>
-              <Avatar src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+              <Avatar src={props.author.image.asset.url} />
               <Box ml={2}>
                 <Typography color="black" variant="subtitle2" component="p">
                   {props.author.name}
