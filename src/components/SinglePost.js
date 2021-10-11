@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import sanityClient from "../client.js";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -10,14 +10,9 @@ import Disqus from "disqus-react";
 import "./Disqus.css";
 
 export default function SinglePost() {
-  const disqusShortname = "daren-hua";
-  const disqusConfig = {
-    url: "http://localhost:3000",
-    identifier: "article-id",
-    title: "Title of Your Article",
-  };
   const [singlePost, setSinglePost] = useState(null);
   const { slug } = useParams();
+  const location = useLocation();
   useEffect(() => {
     sanityClient
       .fetch(
@@ -43,7 +38,12 @@ export default function SinglePost() {
   if (!singlePost) {
     return <div>Loading...</div>;
   }
-
+  const disqusShortname = "daren-hua";
+  const disqusConfig = {
+    url: "http://localhost:3000" + location.pathname,
+    identifier: slug,
+    title: "Title of Your Article",
+  };
   return (
     <div>
       <Container sx={{ paddingBottom: "20px", width: "50%" }}>
