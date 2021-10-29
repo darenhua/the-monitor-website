@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ReactGA from "react-ga";
 import Home from "./components/Home.js";
 import About from "./components/About.js";
 import SinglePost from "./components/SinglePost.js";
@@ -8,6 +9,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./components/Footer";
 
 import "./App.css";
+
+ReactGA.initialize("G-R5GFBHV3GK");
 
 function App() {
   return (

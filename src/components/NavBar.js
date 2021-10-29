@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import ReactGA from "react-ga";
 import sanityClient from "../client.js";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,6 +14,7 @@ import "@fontsource/roboto/500.css";
 export default function NavBar() {
   const refContainer = useRef(null);
   useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
     sanityClient
       .fetch(
         `*[_type == "category"]{
