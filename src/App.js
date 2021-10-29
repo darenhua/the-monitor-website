@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 
-ReactGA.initialize("G-F7T3PEP67V");
+ReactGA.initialize("UA-211587329-1");
 
 function App() {
   return (
